@@ -45,6 +45,23 @@
       animation: directionalEffect 4s linear infinite; /* Animation Directional */
     }
 
+    #shareButton {
+      display: none; /* Masqué par défaut */
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #25D366; /* Couleur de WhatsApp */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    #shareButton:hover {
+      background-color: #1DA851;
+    }
+
     form {
       margin-top: 30px;
       transition: opacity 0.5s ease-in-out;
@@ -146,6 +163,7 @@
   </form>
 
   <div id="personalMessage"></div>
+  <a id="shareButton" target="_blank">Partager sur WhatsApp 📤</a>
 
   <!-- Flocons de neige -->
   <div class="snowflake" style="left: 10%; animation-delay: 0s;">❄️</div>
@@ -180,9 +198,15 @@
       const friendName = document.getElementById('friendName').value;
 
       // Création du message personnalisé
-      const message = `🎅 Joyeux Noël ${friendName} ! 🎄 Avec toute mon affection, ma confiance, que ce noel soit le meilleur pour toi, moi, bref nous tous, de la part de --->  ${yourName}.`;
+      const message = `🎅 Joyeux Noël ${friendName} ! 🎄 Avec toute mon affection, ma confiance, que ce noel soit le meilleur pour toi, moi, bref nous, de la part de --->  ${yourName}.`;
       const messageElement = document.getElementById('personalMessage');
       messageElement.textContent = message;
+
+      // Afficher le bouton de partage WhatsApp
+      const shareButton = document.getElementById('shareButton');
+      shareButton.style.display = 'inline-block'; // Afficher le bouton
+      const whatsappMessage = encodeURIComponent(message); // Encoder le message
+      shareButton.href = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
 
       // Cacher le formulaire
       const form = document.getElementById('nameForm');
