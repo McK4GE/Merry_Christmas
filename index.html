@@ -3,65 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joyeux Noël</title>
+  <title>Message Secret - Joyeux Noël</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #002233, #005566);
-      color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #002233;
+      color: white;
     }
-
     h1 {
-      font-size: 4em;
-      font-weight: bold;
-      background: linear-gradient(to right, #ff0000, #ffffff, #00ff00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 3s infinite;
-    }
-
-    p {
-      font-size: 1.5em;
-      margin: 20px 0;
-    }
-
-    #personalMessage {
-      font-size: 1.8em;
+      font-size: 2.5em;
       margin-top: 20px;
-      font-family: 'Courier New', monospace; /* Style machine à écrire */
-      font-weight: bold; /* Gras */
+    }
+    .message {
+      font-size: 1.5em;
+      margin-top: 30px;
+      font-weight: bold;
       background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
       background-size: 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: directionalEffect 4s linear infinite; /* Animation Directional */
+      animation: directionalEffect 4s linear infinite;
     }
 
-    #shareButton {
-      display: none; /* Masqué par défaut */
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      color: white;
-      background-color: #25D366; /* Couleur de WhatsApp */
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
+    @keyframes directionalEffect {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
     }
 
-    #shareButton:hover {
-      background-color: #1DA851;
-    }
-
+    /* Style du formulaire et du bouton */
     form {
       margin-top: 30px;
       transition: opacity 0.5s ease-in-out;
@@ -89,69 +61,31 @@
       background-color: #ff6347;
     }
 
-    .lights-container {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .light {
-      width: 20px;
-      height: 20px;
-      background-color: #ff0000;
-      border-radius: 50%;
-      animation: blink 1.5s infinite;
-    }
-
-    .light:nth-child(2) { background-color: #00ff00; animation-delay: 0.3s; }
-    .light:nth-child(3) { background-color: #ffff00; animation-delay: 0.6s; }
-    .light:nth-child(4) { background-color: #00ffff; animation-delay: 0.9s; }
-    .light:nth-child(5) { background-color: #ff00ff; animation-delay: 1.2s; }
-    .light:nth-child(6) { background-color: #ffffff; animation-delay: 1.5s; }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    @keyframes directionalEffect {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
-    }
-
-    .snowflake {
-      font-size: 1.5em;
-      position: absolute;
+    #shareButton {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
       color: white;
-      animation: fall 5s linear infinite;
+      background-color: #25D366;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-100vh); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -500%; }
-      100% { background-position: 500%; }
+    #shareButton:hover {
+      background-color: #1DA851;
     }
   </style>
 </head>
 <body>
-  <div class="lights-container">
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-  </div>
 
-  <h1>🎄 Joyeux Noël ! 🎁</h1>
-  <p>Que cette fête soit remplie de bonheur, d'amour et de magie !</p>
+  <h1>Voici votre message secret de Noël ! 🎅🎄</h1>
 
+  <div class="message" id="secretMessage"></div>
+
+  <!-- Formulaire pour entrer les noms -->
   <form id="nameForm">
     <label for="yourName">Votre nom :</label>
     <input type="text" id="yourName" placeholder="Entrez votre nom" required>
@@ -162,33 +96,9 @@
     <button type="submit">Afficher le message 🎉</button>
   </form>
 
-  <div id="personalMessage"></div>
   <a id="shareButton" target="_blank">Partager sur WhatsApp 📤</a>
 
-  <!-- Flocons de neige -->
-  <div class="snowflake" style="left: 10%; animation-delay: 0s;">❄️</div>
-  <div class="snowflake" style="left: 30%; animation-delay: 1s;">❄️</div>
-  <div class="snowflake" style="left: 50%; animation-delay: 2s;">❄️</div>
-  <div class="snowflake" style="left: 70%; animation-delay: 3s;">❄️</div>
-  <div class="snowflake" style="left: 90%; animation-delay: 4s;">❄️</div>
-
-  <!-- Musique de fond -->
-  <audio id="backgroundMusic" loop>
-    <source src="votre-musique.mp3" type="audio/mpeg">
-    Votre navigateur ne supporte pas la lecture audio.
-  </audio>
-
   <script>
-    // Lecture de la musique uniquement quand l'utilisateur est sur la page
-    const audio = document.getElementById('backgroundMusic');
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'visible') {
-        audio.play(); // Reprendre la lecture
-      } else {
-        audio.pause(); // Mettre en pause
-      }
-    });
-
     // Ajouter un message personnalisé et cacher le formulaire
     document.getElementById('nameForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Empêche la soumission normale du formulaire
@@ -198,21 +108,39 @@
       const friendName = document.getElementById('friendName').value;
 
       // Création du message personnalisé
-      const message = `🎅 Joyeux Noël ${friendName} ! 🎄 Avec toute mon affection, ma confiance, que ce noel soit le meilleur pour toi, moi, bref nous, de la part de --->  ${yourName}.`;
-      const messageElement = document.getElementById('personalMessage');
+      const message = `🎅 Joyeux Noël ${friendName} ! 🎄 Avec toute mon affection, ma confiance, que ce Noël soit le meilleur pour toi, moi, bref nous, de la part de ---> ${yourName}.`;
+
+      // Afficher le message personnalisé sur la page actuelle
+      const messageElement = document.getElementById('secretMessage');
       messageElement.textContent = message;
 
       // Afficher le bouton de partage WhatsApp
       const shareButton = document.getElementById('shareButton');
       shareButton.style.display = 'inline-block'; // Afficher le bouton
-      const whatsappMessage = encodeURIComponent(message); // Encoder le message
-      shareButton.href = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
+
+      // Encoder le message pour l'URL
+      const whatsappMessage = encodeURIComponent(message); 
+
+      // Créer l'URL pour WhatsApp qui redirige vers votre site web avec le message comme paramètre
+      shareButton.href = `https://joyeuxchristmas.netlify.app/?message=${whatsappMessage}`;
 
       // Cacher le formulaire
       const form = document.getElementById('nameForm');
       form.style.opacity = 0; // Ajouter une transition
       setTimeout(() => form.style.display = 'none', 500); // Supprimer du flux après l'animation
     });
+
+    // Récupérer les paramètres d'URL sur la page de destination
+    const urlParams = new URLSearchParams(window.location.search);
+    const secretMessage = urlParams.get('message'); // Paramètre message
+
+    // Si le message existe, l'afficher
+    if (secretMessage) {
+      document.getElementById('secretMessage').textContent = decodeURIComponent(secretMessage);
+    } else {
+      document.getElementById('secretMessage').textContent = "Aucun message secret trouvé.";
+    }
   </script>
+
 </body>
 </html>
