@@ -198,36 +198,32 @@
       const friendName = document.getElementById('friendName').value;
 
       // Création du message personnalisé
-      const message = `🎅 Joyeux Noël ${friendName} ! 🎄 Avec toute mon affection, ma confiance, que ce noel soit le meilleur pour toi, moi, bref nous, de la part de --->  ${yourName}.`;
+      const message = `🎅 Joyeux Noël ${friendName} ! 🎄 Avec toute mon affection, ma confiance, que ce Noël soit le meilleur pour toi, moi, bref nous, de la part de --->  ${yourName}.`;
       const messageElement = document.getElementById('personalMessage');
       messageElement.textContent = message;
 
       // Afficher le bouton de partage WhatsApp
       const shareButton = document.getElementById('shareButton');
       shareButton.style.display = 'inline-block'; // Afficher le bouton
-      const whatsappMessage = encodeURIComponent(message); // Encoder le message
-      shareButton.href = `https://api.whatsapp.com/send?text=${whatsappMessage}`;
 
-      
-      // Créer l'URL pour WhatsApp qui redirige vers votre site web avec le message comme paramètre
-      shareButton.href = `https://joyeuxchristmas.netlify.app/?message=${whatsappMessage}`;
+      // URL du site avec le message encodé comme paramètre
+      const encodedMessage = encodeURIComponent(message);
+      const siteURL = `https://joyeuxchristmas.netlify.app/?message=${encodedMessage}`;
+      shareButton.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(siteURL)}`;
 
       // Cacher le formulaire
       const form = document.getElementById('nameForm');
       form.style.opacity = 0; // Ajouter une transition
       setTimeout(() => form.style.display = 'none', 500); // Supprimer du flux après l'animation
+    });
 
-         // Récupérer les paramètres d'URL sur la page de destination
+    // Afficher le message secret s'il est présent dans l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const secretMessage = urlParams.get('message'); // Paramètre message
-
-    // Si le message existe, l'afficher
     if (secretMessage) {
-      document.getElementById('secretMessage').textContent = decodeURIComponent(secretMessage);
-    } else 
-      document.getElementById('secretMessage').textContent = "Aucun message secret trouvé.";
-       
-    });
+      document.getElementById('personalMessage').textContent = decodeURIComponent(secretMessage);
+      document.getElementById('nameForm').style.display = 'none'; // Masquer le formulaire
+    }
   </script>
 </body>
 </html>
